@@ -1,13 +1,21 @@
+// Workaround for https://github.com/gradle/gradle/issues/1697 - as found in https://github.com/gradle/gradle/issues/1697#issuecomment-386824663
 pluginManagement {
     resolutionStrategy {
         eachPlugin {
-            if (requested.id.id == "kotlin-multiplatform") {
-                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+            if (requested.id.id == 'org.jetbrains.kotlin.jvm') {
+                useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+            }
+            if ( requested.id.id == 'io.gitlab.arturbosch.detekt' ) {
+                useModule(requested.id.id + ":detekt-gradle-plugin:$detekt_version")
+            }
+            if ( requested.id.id == 'com.jfrog.bintray' ) {
+                useModule(requested.id.id + ".gradle:gradle-bintray-plugin:$gradle_bintray_version")
+            }
+            if ( requested.id.id == 'org.jetbrains.dokka' ) {
+                useModule(requested.id.id + ":dokka-gradle-plugin:$dokka_version")
             }
         }
     }
 }
+
 rootProject.name = 'kotlin-guard'
-
-
-enableFeaturePreview('GRADLE_METADATA')

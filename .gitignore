@@ -1,3 +1,7 @@
 .gradle
 build
-workspace.xml
+.classpath
+.project
+bin
+.idea
+.settings
