@@ -18,7 +18,7 @@ assert name == 'kotlin-guard'
 description = 'Kotlin implementation of Swift\'s guard keyword'
 
 group 'com.pcoltau'
-version = "0.1.4"
+version = "0.1.5"
 
 def githubTokenOrEmpty = hasProperty('githubToken') ? githubToken : ''
 
