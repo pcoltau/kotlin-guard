@@ -1,7 +1,7 @@
 plugins {
     //id('org.jmailen.kotlinter').version('1.23.1')
     id("org.jetbrains.kotlin.jvm")
-    id("com.github.breadmoirai.github-release").version("2.2.8").apply(true)
+    id("com.github.breadmoirai.github-release").version("2.2.9").apply(true)
     id("io.gitlab.arturbosch.detekt").apply(true)
     id("com.jfrog.bintray").apply(true)
     id("org.jetbrains.dokka").apply(true)
@@ -17,10 +17,10 @@ apply plugin: 'jacoco'
 assert name == 'kotlin-guard'
 description = 'Kotlin implementation of Swift\'s guard keyword'
 
-println("version:")
-
 group 'com.pcoltau'
-version = "0.0.1"
+version = "0.1.4"
+
+def githubTokenOrEmpty = hasProperty('githubToken') ? githubToken : ''
 
 project.ext {
     githubUser = "pcoltau"
@@ -182,7 +182,7 @@ if (System.env.CI != "true") {
 
         publications = ['MyPublication']
     }
-
+*/
     // Create the publication with the pom configuration:
     publishing {
         publications {
@@ -197,13 +197,14 @@ if (System.env.CI != "true") {
                 }
             }
         }
-    }*/
-
+    }
 
     githubRelease {
-        token githubToken
+        token githubTokenOrEmpty
         draft false // by default this is false
         prerelease false // by default this is false
+        tagName "${project.version}"
+        releaseName "${project.version}"
         releaseAssets jar.destinationDirectory.asFile.get().listFiles() // this points to which files you want to upload as assets with your release
     }
 }
